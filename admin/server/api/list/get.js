@@ -1,6 +1,7 @@
 var async = require('async');
 var assign = require('object-assign');
 var listToArray = require('list-to-array');
+var addTenancyFilter = require('../helpers/addTenancyFilter');
 
 module.exports = function (req, res) {
 	var where = {};
@@ -28,6 +29,10 @@ module.exports = function (req, res) {
 	}
 	if (req.query.search) {
 		assign(where, req.list.addSearchToQuery(req.query.search));
+	}
+	const tenancyFilter = addTenancyFilter(req.list, req.user);
+	if (tenancyFilter) {
+		assign(where, tenancyFilter);
 	}
 	var query = req.list.model.find(where);
 	if (req.query.populate) {
