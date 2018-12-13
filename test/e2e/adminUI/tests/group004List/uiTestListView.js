@@ -110,15 +110,15 @@ module.exports = {
 	'List screen user item must have a Is Member column': function (browser) {
 		browser.adminUIListScreen.assertItemFieldUIVisible({
 			fields: [
-				{ row: 1, column: 5, name: 'isMember', },
-				{ row: 2, column: 5, name: 'isMember', },
+				{ row: 1, column: 6, name: 'isMember', },
+				{ row: 2, column: 6, name: 'isMember', },
 			],
 		});
 
 		browser.adminUIListScreen.assertItemFieldValueEquals({
 			fields: [
-				{ row: 1, column: 5, name: 'isMember', value: 'true', },
-				{ row: 2, column: 5, name: 'isMember', value: 'false', },
+				{ row: 1, column: 6, name: 'isMember', value: 'true', },
+				{ row: 2, column: 6, name: 'isMember', value: 'false', },
 			],
 		});
 	},

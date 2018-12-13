@@ -28,6 +28,9 @@ User.add({
 	isAdmin: {
 		type: Types.Boolean,
 	},
+	isSuperAdmin: {
+		type: Types.Boolean,
+	},
 	isMember: {
 		type: Types.Boolean,
 		defaults: true,
@@ -39,7 +42,7 @@ User.schema.virtual('canAccessKeystone').get(function () {
 	return this.isAdmin;
 });
 
-User.defaultColumns = 'name, email, isAdmin, isMember';
+User.defaultColumns = 'name, email, isAdmin, isSuperAdmin, isMember';
 User.register();
 
 module.exports = User;

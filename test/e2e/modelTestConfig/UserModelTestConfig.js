@@ -14,6 +14,7 @@ module.exports = function UserModelTestConfig (config) {
 		password: new PasswordFieldTestObject(objectAssign({}, config, {fieldName: 'password'})),
 		resetPasswordKey: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'resetPasswordKey'})),
 		isAdmin: new BooleanFieldTestObject(objectAssign({}, config, {fieldName: 'isAdmin'})),
+		isSuperAdmin: new BooleanFieldTestObject(objectAssign({}, config, {fieldName: 'isSuperAdmin'})),
 		isMember: new BooleanFieldTestObject(objectAssign({}, config, {fieldName: 'isMember'})),
 	};
 };
