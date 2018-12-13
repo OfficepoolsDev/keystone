@@ -11,7 +11,7 @@ module.exports = function (req, res) {
 		if (tenancyFilter) {
 			assign(where, tenancyFilter);
 		}
-		list.model.find(where).count(function (err, count) {
+		list.model.count().where(where).exec(function (err, count) {
 			counts[list.key] = count;
 			next(err);
 		});
