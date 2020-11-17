@@ -87,6 +87,12 @@ module.exports = function IndexRoute (req, res) {
 		locals.cloudinaryScript = cloudinary.cloudinary_js_config();
 	};
 
+	if (!req.user.isSuperAdmin && keystone.get('hidden lists')){
+		keystone.get('hidden lists').map(function (key) {
+  		delete locals.keystone.lists[key];
+  	});
+	}
+
 	ejs.renderFile(templatePath, locals, { delimiter: '%' }, function (err, str) {
 		if (err) {
 			console.error('Could not render Admin UI Index Template:', err);
