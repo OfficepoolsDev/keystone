@@ -28,6 +28,7 @@ import CreateForm from '../../shared/CreateForm';
 import FlashMessages from '../../shared/FlashMessages';
 import ItemsTable from './components/ItemsTable/ItemsTable';
 import UpdateForm from './components/UpdateForm';
+import UploadForm from './components/UploadForm';
 import { plural as pluralize } from '../../../utils/string';
 import { listsByPath } from '../../../utils/lists';
 import { checkForQueryChange } from '../../../utils/queryParams';
@@ -61,6 +62,7 @@ const ListView = React.createClass({
 			manageMode: false,
 			showCreateForm: false,
 			showUpdateForm: false,
+			showUploadForm: false,
 		};
 	},
 	componentWillMount () {
@@ -235,7 +237,7 @@ const ListView = React.createClass({
 	},
 	renderHeader () {
 		const items = this.props.items;
-		const { autocreate, nocreate, plural, singular } = this.props.currentList;
+		const { autocreate, nocreate, noupload, plural, singular } = this.props.currentList;
 
 		return (
 			<Container style={{ paddingTop: '2em' }}>
@@ -263,6 +265,11 @@ const ListView = React.createClass({
 					createOnClick={autocreate
 						? this.createAutocreate
 						: this.openCreateModal}
+
+					// upload
+					uploadIsAvailable={!noupload}
+					createListName={singular}
+					uploadOnClick={this.openUploadModal}
 
 					// search
 					searchHandleChange={this.updateSearch}
@@ -390,6 +397,9 @@ const ListView = React.createClass({
 	},
 	openCreateModal () {
 		this.toggleCreateModal(true);
+	},
+	openUploadModal () {
+		this.toggleUploadModal(true);
 	},
 	closeCreateModal () {
 		this.toggleCreateModal(false);
@@ -535,6 +545,12 @@ const ListView = React.createClass({
 					itemIds={Object.keys(this.state.checkedItems)}
 					list={this.props.currentList}
 					onCancel={() => this.toggleUpdateModal(false)}
+				/>
+				<UploadForm
+					isOpen={this.state.showUploadForm}
+					itemIds={Object.keys(this.state.checkedItems)}
+					list={this.props.currentList}
+					onCancel={() => this.toggleUploadModal(false)}
 				/>
 				{this.renderConfirmationDialog()}
 			</div>

@@ -44,6 +44,27 @@ function CreateButton ({ listName, onClick, ...props }) {
 	);
 };
 
+function UploadButton ({ listName, onClick, ...props }) {
+	return (
+		<GlyphButton
+				block
+				color="success"
+				data-e2e-list-create-button="header"
+				glyph="plus"
+				onClick={onClick}
+				position="left"
+				title={`Upload ${listName}`}
+				{...props}
+		>
+		<ResponsiveText
+				visibleSM="Upload"
+				visibleMD="Upload"
+				visibleLG={`Upload ${listName}`}
+		/>
+		</GlyphButton>
+	);
+};
+
 function ListHeaderToolbar ({
 	// common
 	dispatch,
@@ -57,6 +78,8 @@ function ListHeaderToolbar ({
 	createIsAvailable,
 	createListName,
 	createOnClick,
+	uploadOnClick,
+	uploadIsAvailable,
 
 	// search
 	searchHandleChange,
@@ -125,6 +148,14 @@ function ListHeaderToolbar ({
 							/>
 						</ButtonDivider>
 					</Section>}
+					{uploadIsAvailable && <Section cssStyles={classes.create}>
+						<ButtonDivider>
+							<UploadButton
+								listName={createListName}
+								onClick={uploadOnClick}
+							/>
+						</ButtonDivider>
+					</Section>}
 				</Group>
 			</Section>
 		</Group>
@@ -137,6 +168,8 @@ ListHeaderToolbar.propTypes = {
 	createIsAvailable: PropTypes.bool,
 	createListName: PropTypes.string,
 	createOnClick: PropTypes.func.isRequired,
+	uploadOnClick: PropTypes.func.isRequired,
+	uploadIsAvailable: PropTypes.bool,
 	dispatch: PropTypes.func.isRequired,
 	expandIsActive: PropTypes.bool,
 	expandOnClick: PropTypes.func.isRequired,
