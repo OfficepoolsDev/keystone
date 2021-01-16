@@ -395,6 +395,11 @@ const ListView = React.createClass({
 			showCreateForm: visible,
 		});
 	},
+	toggleUploadModal (visible) {
+		this.setState({
+			showUploadForm: visible,
+		});
+	},
 	openCreateModal () {
 		this.toggleCreateModal(true);
 	},
