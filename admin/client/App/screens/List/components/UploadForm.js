@@ -67,7 +67,7 @@ var UploadForm = React.createClass({
 
 	renderForm () {
 		const { itemIds, list } = this.props;
-		const formAction = '/addon/upload';
+		const formAction = `/addon/upload/${list.plural}`;
 
 		return (
 			<Form layout='horizontal' action={formAction} noValidate='true' encType='multipart/form-data' method='post'>
